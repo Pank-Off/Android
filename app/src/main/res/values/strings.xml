@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Weather</string>
     <string name="moscow">Moscow</string>
-    <string name="wed_10_march_14_04">Wed, 10 march 14:04</string>
+    <string name="wed_10_march_14_04">Mon, 10 march 14:04</string>
     <string name="_8_u00b0">8°</string>
     <string name="cloudy">Cloudy</string>
     <string name="_7_u00b0">7°</string>
