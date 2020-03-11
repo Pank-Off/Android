@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Погода</string>
     <string name="moscow">Москва</string>
-    <string name="wed_10_march_14_04">Ср, 10 марта 14:04</string>
+    <string name="wed_10_march_14_04">Пон, 10 марта 14:04</string>
     <string name="_8_u00b0">8°</string>
     <string name="cloudy">Облачно</string>
     <string name="_7_u00b0">7°</string>
