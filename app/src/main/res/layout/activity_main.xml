@@ -65,7 +65,9 @@
                 android:text="@string/hourly"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:background="@color/colorCitySky"/>
+                android:paddingStart="20dp"
+                android:background="@color/colorCitySky"
+                tools:ignore="RtlSymmetry" />
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -90,6 +92,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/_15_00"
+                            android:layout_gravity="center"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -98,6 +101,7 @@
                             android:layout_height="wrap_content"
                             android:drawableTop="@drawable/cloud_small"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:text="@string/_8_u00b0"
                             android:textSize="30sp" />
 
@@ -114,6 +118,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/_16_00"
+                            android:layout_gravity="center"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -122,6 +127,7 @@
                             android:layout_height="wrap_content"
                             android:drawableTop="@drawable/cloud_small"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:text="@string/_7_u00b0"
                             android:textSize="30sp" />
 
@@ -139,6 +145,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/_17_00"
+                            android:layout_gravity="center"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -147,6 +154,7 @@
                             android:layout_height="wrap_content"
                             android:drawableTop="@drawable/sunny"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:text="@string/_7_u00b0"
                             android:textSize="30sp" />
 
@@ -163,6 +171,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/_18_00"
+                            android:layout_gravity="center"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -171,6 +180,7 @@
                             android:layout_height="wrap_content"
                             android:drawableTop="@drawable/rainy"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:text="@string/_6_u00b0"
                             android:textSize="30sp" />
 
@@ -188,6 +198,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/_19_00"
+                            android:layout_gravity="center"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -196,6 +207,7 @@
                             android:layout_height="wrap_content"
                             android:drawableTop="@drawable/rainy"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:text="@string/_6_u00b0"
                             android:textSize="30sp" />
 
@@ -211,6 +223,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/_20_00"
+                            android:layout_gravity="center"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -219,6 +232,7 @@
                             android:layout_height="wrap_content"
                             android:drawableTop="@drawable/rainy"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:text="@string/_4_u00b0"
                             android:textSize="30sp" />
 
@@ -282,7 +296,9 @@
                 android:text="@string/daily"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:background="@color/colorCitySky"/>
+                android:paddingStart="20dp"
+                android:background="@color/colorCitySky"
+                tools:ignore="RtlSymmetry" />
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -307,13 +323,15 @@
                             android:layout_height="wrap_content"
                             android:text="@string/monday"
                             android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:layout_gravity="center"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:drawableTop="@drawable/rainy"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:text="@string/_8_u00b0"
                             android:textSize="30sp" />
 
@@ -331,13 +349,15 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tuesday"
                             android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:layout_gravity="center"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:drawableTop="@drawable/cloud_small"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:text="@string/_7_u00b0"
                             android:textSize="30sp" />
 
@@ -355,6 +375,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/wednesday"
+                            android:layout_gravity="center"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -363,6 +384,7 @@
                             android:layout_height="wrap_content"
                             android:drawableTop="@drawable/sunny"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:text="@string/_13_u00b0"
                             android:textSize="30sp" />
 
@@ -379,6 +401,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/thursrday"
+                            android:layout_gravity="center"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -387,6 +410,7 @@
                             android:layout_height="wrap_content"
                             android:drawableTop="@drawable/cloud_small"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:text="@string/_6_u00b0"
                             android:textSize="30sp" />
 
@@ -404,6 +428,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/friday"
+                            android:layout_gravity="center"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -412,6 +437,7 @@
                             android:layout_height="wrap_content"
                             android:drawableTop="@drawable/cloud_small"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:text="@string/_6_u00b0"
                             android:textSize="30sp" />
 
@@ -427,6 +453,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/saturday"
+                            android:layout_gravity="center"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -435,6 +462,7 @@
                             android:layout_height="wrap_content"
                             android:drawableTop="@drawable/rainy"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:text="@string/_4_u00b0"
                             android:textSize="30sp" />
 
@@ -452,6 +480,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/Sunday"
+                            android:layout_gravity="center"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -460,35 +489,12 @@
                             android:layout_height="wrap_content"
                             android:drawableTop="@drawable/wind"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:text="@string/_6_u00b0"
                             android:textSize="30sp" />
 
                     </LinearLayout>
 
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/monday"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/sunny"
-                            android:gravity="center"
-                            android:text="@string/_8_u00b0"
-                            android:textSize="30sp" />
-
-                    </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -502,5 +508,6 @@
         android:layout_gravity="end"
         android:src="@drawable/settings"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/settings" />
 </androidx.constraintlayout.widget.ConstraintLayout>

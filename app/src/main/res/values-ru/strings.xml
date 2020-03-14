@@ -34,20 +34,20 @@
     <string name="use_current_location">Текущее местоположение</string>
     <string name="notification">Уведомления</string>
     <string name="show_on_widget">Показ в виджете</string>
-    <string name="refresh_when_app_opens">Обновлять при открытие приложения</string>
+    <string name="refresh_when_app_opens">Обновлять при открытии приложения</string>
     <string name="weather_alerts">Предупреждать о погоде</string>
     <string name="add_weather_icon">Добавить значок Погода</string>
     <string name="customization_service">Служба персонализации</string>
     <string name="about_weather">О приложении "Погода"</string>
 
     <!--WeekDay-->
-    <string name="monday">Понедельник</string>
-    <string name="tuesday">Вторник</string>
-    <string name="wednesday">Среда</string>
-    <string name="thursrday">Четверг</string>
-    <string name="friday">Пятница</string>
-    <string name="saturday">Суббота</string>
-    <string name="Sunday">Воскресенье</string>
+    <string name="monday">Пн</string>
+    <string name="tuesday">Вт</string>
+    <string name="wednesday">Ср</string>
+    <string name="thursrday">Чт</string>
+    <string name="friday">Пт</string>
+    <string name="saturday">Сб</string>
+    <string name="Sunday">Вс</string>
     <string name="_15_00">15:00</string>
     <string name="_16_00">16:00</string>
     <string name="_17_00">17:00</string>
@@ -60,4 +60,5 @@
 
     <string name="hourly">Ежечасно</string>
     <string name="daily">Ежедневно</string>
+    <string name="settings">Настройки</string>
 </resources>
