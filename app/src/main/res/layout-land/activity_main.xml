@@ -15,13 +15,14 @@
             android:id="@+id/linlay1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:id="@+id/firstLay"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@color/colorSky"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
@@ -62,455 +63,464 @@
 
             <LinearLayout
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:paddingTop="50dp"
-                android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/hourly"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginEnd="20dp"
-                android:paddingStart="20dp"
-                android:background="@color/colorCitySky"
-                tools:ignore="RtlSymmetry" />
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="20dp"
-                android:paddingEnd="20dp"
-                tools:ignore="RtlSymmetry"
-                >
+                android:orientation="vertical"
+                android:paddingTop="50dp">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="20dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@color/colorCitySky"
-                    app:layout_constraintTop_toBottomOf="@+id/firstLay">
+                    android:paddingStart="20dp"
+                    android:text="@string/hourly"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlSymmetry" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="20dp"
+                    android:paddingEnd="20dp"
+                    tools:ignore="RtlSymmetry">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
+                        android:background="@color/colorCitySky"
+                        android:orientation="horizontal"
+                        android:padding="20dp"
+                        app:layout_constraintTop_toBottomOf="@+id/firstLay">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/_15_00"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            tools:ignore="RtlSymmetry">
 
-                        <TextView
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/_15_00"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:drawableTop="@drawable/cloud_small"
+                                android:gravity="center"
+                                android:text="@string/_8_u00b0"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/cloud_small"
-                            android:gravity="center"
-                            android:text="@string/_8_u00b0"
-                            android:textSize="30sp" />
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            tools:ignore="RtlSymmetry">
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/_16_00"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:drawableTop="@drawable/cloud_small"
+                                android:gravity="center"
+                                android:text="@string/_7_u00b0"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            tools:ignore="RtlSymmetry">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/_17_00"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:drawableTop="@drawable/sunny"
+                                android:gravity="center"
+                                android:text="@string/_7_u00b0"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            tools:ignore="RtlSymmetry">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/_18_00"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:drawableTop="@drawable/rainy"
+                                android:gravity="center"
+                                android:text="@string/_6_u00b0"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            tools:ignore="RtlSymmetry">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/_19_00"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableTop="@drawable/rainy"
+                                android:gravity="center"
+                                android:text="@string/_6_u00b0"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            tools:ignore="RtlSymmetry">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/_20_00"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:drawableTop="@drawable/rainy"
+                                android:gravity="center"
+                                android:text="@string/_4_u00b0"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            tools:ignore="RtlSymmetry">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/_21_00"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:drawableTop="@drawable/wind"
+                                android:gravity="center"
+                                android:text="@string/_6_u00b0"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            tools:ignore="RtlSymmetry">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/_22_00"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:drawableTop="@drawable/sunny"
+                                android:gravity="center"
+                                android:text="@string/_8_u00b0"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
                     </LinearLayout>
+                </HorizontalScrollView>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/_16_00"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/cloud_small"
-                            android:gravity="center"
-                            android:text="@string/_7_u00b0"
-                            android:textSize="30sp" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/_17_00"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/sunny"
-                            android:gravity="center"
-                            android:text="@string/_7_u00b0"
-                            android:textSize="30sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/_18_00"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/rainy"
-                            android:gravity="center"
-                            android:text="@string/_6_u00b0"
-                            android:textSize="30sp" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/_19_00"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/rainy"
-                            android:gravity="center"
-                            android:text="@string/_6_u00b0"
-                            android:textSize="30sp" />
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/_20_00"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/rainy"
-                            android:gravity="center"
-                            android:text="@string/_4_u00b0"
-                            android:textSize="30sp" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/_21_00"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/wind"
-                            android:gravity="center"
-                            android:text="@string/_6_u00b0"
-                            android:textSize="30sp" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/_22_00"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/sunny"
-                            android:gravity="center"
-                            android:text="@string/_8_u00b0"
-                            android:textSize="30sp" />
-
-                    </LinearLayout>
-                </LinearLayout>
-            </HorizontalScrollView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/daily"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginEnd="20dp"
-                android:paddingStart="20dp"
-                android:background="@color/colorCitySky"
-                tools:ignore="RtlSymmetry" />
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingEnd="20dp"
-                tools:ignore="RtlSymmetry">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
                     android:background="@color/colorCitySky"
-                    android:orientation="horizontal"
-                    android:padding="20dp"
-                    app:layout_constraintTop_toBottomOf="@+id/firstLay">
+                    android:paddingStart="20dp"
+                    android:text="@string/daily"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlSymmetry" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingEnd="20dp"
+                    tools:ignore="RtlSymmetry">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
+                        android:background="@color/colorCitySky"
+                        android:orientation="horizontal"
+                        android:padding="20dp"
+                        app:layout_constraintTop_toBottomOf="@+id/firstLay">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/monday"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            tools:ignore="RtlSymmetry">
 
-                        <TextView
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/monday"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:drawableTop="@drawable/rainy"
+                                android:gravity="center"
+                                android:text="@string/_8_u00b0"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/rainy"
-                            android:gravity="center"
-                            android:text="@string/_8_u00b0"
-                            android:textSize="30sp" />
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            tools:ignore="RtlSymmetry">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/tuesday"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:drawableTop="@drawable/cloud_small"
+                                android:gravity="center"
+                                android:text="@string/_7_u00b0"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            tools:ignore="RtlSymmetry">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/wednesday"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:drawableTop="@drawable/sunny"
+                                android:gravity="center"
+                                android:text="@string/_13_u00b0"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            tools:ignore="RtlSymmetry">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/thursrday"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:drawableTop="@drawable/cloud_small"
+                                android:gravity="center"
+                                android:text="@string/_6_u00b0"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            tools:ignore="RtlSymmetry">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/friday"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:drawableTop="@drawable/cloud_small"
+                                android:gravity="center"
+                                android:text="@string/_6_u00b0"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            tools:ignore="RtlSymmetry">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/saturday"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:drawableTop="@drawable/rainy"
+                                android:gravity="center"
+                                android:text="@string/_4_u00b0"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            tools:ignore="RtlSymmetry">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/Sunday"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:drawableTop="@drawable/wind"
+                                android:gravity="center"
+                                android:text="@string/_6_u00b0"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
+                </HorizontalScrollView>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/tuesday"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/cloud_small"
-                            android:gravity="center"
-                            android:text="@string/_7_u00b0"
-                            android:textSize="30sp" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/wednesday"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/sunny"
-                            android:gravity="center"
-                            android:text="@string/_13_u00b0"
-                            android:textSize="30sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/thursrday"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/cloud_small"
-                            android:gravity="center"
-                            android:text="@string/_6_u00b0"
-                            android:textSize="30sp" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/friday"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/cloud_small"
-                            android:gravity="center"
-                            android:text="@string/_6_u00b0"
-                            android:textSize="30sp" />
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/saturday"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/rainy"
-                            android:gravity="center"
-                            android:text="@string/_4_u00b0"
-                            android:textSize="30sp" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/Sunday"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/wind"
-                            android:gravity="center"
-                            android:text="@string/_6_u00b0"
-                            android:textSize="30sp" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/monday"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/sunny"
-                            android:gravity="center"
-                            android:text="@string/_8_u00b0"
-                            android:textSize="30sp" />
-
-                    </LinearLayout>
-                </LinearLayout>
-            </HorizontalScrollView>
-
-        </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
@@ -521,5 +531,6 @@
         android:layout_gravity="end"
         android:src="@drawable/settings"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/settings" />
 </androidx.constraintlayout.widget.ConstraintLayout>
