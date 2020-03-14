@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="75sp"
+            android:hint="@string/input_current_city"
+            />
+
+        <CheckBox
+            android:id="@+id/wind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/wind"
+            android:textSize="24sp"/>
+
+        <CheckBox
+            android:id="@+id/airpress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/airpressure"
+            android:textSize="24sp"/>
+        <TextView
+            android:id="@+id/moscow"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/moscow"
+            android:textSize="24sp"
+            android:gravity="center_vertical" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/tokio"
+            android:textSize="24sp"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/paris"
+            android:textSize="24sp"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/ny"
+            android:textSize="24sp"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/kiev"
+            android:textSize="24sp"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/berlin"
+            android:textSize="24sp"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/madrid"
+            android:textSize="24sp"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/istambul"
+            android:textSize="24sp"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/london"
+            android:textSize="24sp"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/tallinn"
+            android:textSize="24sp"
+            android:gravity="center_vertical"/>
+
+</LinearLayout>
+</ScrollView>
