@@ -54,20 +54,19 @@ public class BaseActivity extends AppCompatActivity {
         Log.d(getClass().getSimpleName() + " - LifeCycle", "onSaveInstanceState");
     }
 
-/**
- * Должно рабоать при явном прописании в манифесте android:configChanges="orientation"
- * но у меня не вызывается метод =(
-
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        Log.d(getClass().getSimpleName() + " - LifeCycle", "onConfigurationChanged");
-        if (Configuration.ORIENTATION_LANDSCAPE == newConfig.orientation)
-            Toast.makeText(this, "Orientation Landscape", Toast.LENGTH_SHORT).show();
-        else if (Configuration.ORIENTATION_PORTRAIT == newConfig.orientation)
-            Toast.makeText(this, "Orientation Portrait", Toast.LENGTH_SHORT).show();
-    }
-*/
+    /**
+     * Должно рабоать при явном прописании в манифесте android:configChanges="orientation"
+     * но у меня не вызывается метод =(
+     *
+     * @Override public void onConfigurationChanged(@NonNull Configuration newConfig) {
+     * super.onConfigurationChanged(newConfig);
+     * Log.d(getClass().getSimpleName() + " - LifeCycle", "onConfigurationChanged");
+     * if (Configuration.ORIENTATION_LANDSCAPE == newConfig.orientation)
+     * Toast.makeText(this, "Orientation Landscape", Toast.LENGTH_SHORT).show();
+     * else if (Configuration.ORIENTATION_PORTRAIT == newConfig.orientation)
+     * Toast.makeText(this, "Orientation Portrait", Toast.LENGTH_SHORT).show();
+     * }
+     */
 
     @Override
     protected void onStop() {
