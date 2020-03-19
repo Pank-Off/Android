@@ -40,7 +40,6 @@ public class MainActivity extends BaseActivity {
         String weatherTomorrow = weatherTomorrowView.getText().toString();
         Drawable imgWeather = weatherTomorrowView.getResources().getDrawable(R.drawable.night);
         outState.putSerializable(EXTRA, DataWeather.getInstance(imgWeather, weatherTomorrow));
-
         //Toast.makeText(getApplicationContext(),"onSaveInstanceState",Toast.LENGTH_SHORT).show();
     }
 
