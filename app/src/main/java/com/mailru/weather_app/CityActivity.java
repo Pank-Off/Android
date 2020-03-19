@@ -7,33 +7,49 @@ import android.widget.TextView;
 
 public class CityActivity extends BaseActivity {
 
+    private TextView currentCity;
+    private CheckBox wind;
+    private CheckBox airpress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city);
 
-        TextView view = findViewById(R.id.moscow);
-        view.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        });
+        //Не слишком перемудрил с распределением кода по методам?
+        initViews();
+        setOnClickListenerForTextView();
+        setOnCheckedChangeListener();
+    }
 
-        CheckBox wind = findViewById(R.id.wind);
-        CheckBox airpress = findViewById(R.id.airpress);
+    private void initViews() {
+        currentCity = findViewById(R.id.moscow);
+        wind = findViewById(R.id.wind);
+        airpress = findViewById(R.id.airpress);
+    }
+
+    private void setOnCheckedChangeListener() {
         wind.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 String Speed_Wind = "Moscow\n5 m/s";
-                view.setText(Speed_Wind);
+                currentCity.setText(Speed_Wind);
             } else
-                view.setText(R.string.moscow);
+                currentCity.setText(R.string.moscow);
         });
 
         airpress.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 String pressure = "Moscow" + "\n" + "750 mm of mercury";
-                view.setText(pressure);
+                currentCity.setText(pressure);
             } else
-                view.setText(R.string.moscow);
+                currentCity.setText(R.string.moscow);
+        });
+    }
+
+    private void setOnClickListenerForTextView() {
+        currentCity.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         });
     }
 }
