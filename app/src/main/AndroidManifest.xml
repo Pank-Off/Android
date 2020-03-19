@@ -18,13 +18,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".CityActivity">
+        <activity android:name=".CityActivity" />
 
-        </activity>
+        <activity android:name=".SettingsActivity" />
 
-        <activity android:name=".SettingsActivity">
-
-        </activity>
+        <activity android:name=".BaseActivity" />
     </application>
 
 </manifest>
