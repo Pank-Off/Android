@@ -9,12 +9,27 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="75sp"
-            android:hint="@string/input_current_city"
-            android:inputType="text"
-            tools:ignore="Autofill" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/inputCity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/input_current_city"
+                android:inputType="text"
+                tools:ignore="Autofill" />
+
+            <Button
+                android:id="@+id/selectBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/select" />
+        </LinearLayout>
 
         <CheckBox
             android:id="@+id/wind"

@@ -2,7 +2,9 @@ package com.mailru.weather_app;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,23 +16,49 @@ public class MainActivity extends BaseActivity {
     private ImageView settings_img;
     private TextView weatherTomorrowView;
     private TextView weatherTodayView;
+    private TextView city;
+    private Button searchBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initViews();
+
+        String currentCity = getIntent().getStringExtra(CityActivity.CITY_KEY);
+        String currentGrad = getIntent().getStringExtra(CityActivity.GRAD_KEY);
+        if(currentCity!=null && currentGrad!=null) {
+            city.setText(currentCity);
+            weatherTodayView.setText(currentGrad);
+        }
+
+        setOnImageClickListener();
+        setOnSearchBtnClickListener();
+    }
+
+
+    private void initViews() {
+        settings_img = findViewById(R.id.settings);
+        weatherTomorrowView = findViewById(R.id.weatherTomorrow);
+        weatherTodayView = findViewById(R.id.weatherToday);
+        city = findViewById(R.id.city);
+        searchBtn = findViewById(R.id.searchBtn);
+    }
+
+    private void setOnImageClickListener() {
         settings_img.setOnClickListener(v -> {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         });
     }
 
-    private void initViews() {
-        settings_img = findViewById(R.id.settings);
-        weatherTomorrowView = findViewById(R.id.weatherTomorrow);
-        weatherTodayView = findViewById(R.id.weatherToday);
+    private void setOnSearchBtnClickListener() {
+        searchBtn.setOnClickListener(v->{
+            String url = getString(R.string.url_yandex_weather);
+            Uri address = Uri.parse(url);
+            Intent linkIntent = new Intent(Intent.ACTION_VIEW, address);
+            startActivity(linkIntent);
+        });
     }
 
     @Override
