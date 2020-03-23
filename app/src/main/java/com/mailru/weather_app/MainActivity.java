@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,7 +17,7 @@ public class MainActivity extends BaseActivity {
     private TextView weatherTomorrowView;
     private TextView weatherTodayView;
     private TextView city;
-    private Button searchBtn;
+    private LinearLayout weatherTodayLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +27,13 @@ public class MainActivity extends BaseActivity {
 
         String currentCity = getIntent().getStringExtra(CityActivity.CITY_KEY);
         String currentGrad = getIntent().getStringExtra(CityActivity.GRAD_KEY);
-        if(currentCity!=null && currentGrad!=null) {
+        if (currentCity != null && currentGrad != null) {
             city.setText(currentCity);
             weatherTodayView.setText(currentGrad);
         }
 
         setOnImageClickListener();
-        setOnSearchBtnClickListener();
+        setOnSearchLayClickListener();
     }
 
 
@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity {
         weatherTomorrowView = findViewById(R.id.weatherTomorrow);
         weatherTodayView = findViewById(R.id.weatherToday);
         city = findViewById(R.id.city);
-        searchBtn = findViewById(R.id.searchBtn);
+        weatherTodayLayout = findViewById(R.id.firstLay);
     }
 
     private void setOnImageClickListener() {
@@ -52,8 +52,8 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    private void setOnSearchBtnClickListener() {
-        searchBtn.setOnClickListener(v->{
+    private void setOnSearchLayClickListener() {
+        weatherTodayLayout.setOnClickListener(v -> {
             String url = getString(R.string.url_yandex_weather);
             Uri address = Uri.parse(url);
             Intent linkIntent = new Intent(Intent.ACTION_VIEW, address);
@@ -68,8 +68,6 @@ public class MainActivity extends BaseActivity {
         String weatherTomorrow = weatherTomorrowView.getText().toString();
         Drawable imgWeather = weatherTomorrowView.getResources().getDrawable(R.drawable.night);
         outState.putSerializable(EXTRA, DataWeather.getInstance(imgWeather, weatherTomorrow));
-
-        //Toast.makeText(getApplicationContext(),"onSaveInstanceState",Toast.LENGTH_SHORT).show();
     }
 
     @Override

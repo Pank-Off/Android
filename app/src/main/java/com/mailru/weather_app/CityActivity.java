@@ -90,9 +90,8 @@ public class CityActivity extends BaseActivity {
                     intent.putExtra(CITY_KEY, selected_city);
                     intent.putExtra(GRAD_KEY, cityMap.get(selected_city));
                     startActivity(intent);
-                }
-                else{
-                    Toast.makeText(this,getString(R.string.incorrect),Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, getString(R.string.incorrect), Toast.LENGTH_SHORT).show();
                 }
             }
         });
