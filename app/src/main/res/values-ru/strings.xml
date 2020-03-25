@@ -61,4 +61,8 @@
     <string name="hourly">Ежечасно</string>
     <string name="daily">Ежедневно</string>
     <string name="settings">Настройки</string>
+    <string name="select">Выбрать</string>
+
+    <string name="search">Искать</string>
+    <string name="incorrect">Некорректный ввод</string>
 </resources>

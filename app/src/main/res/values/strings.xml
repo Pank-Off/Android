@@ -51,4 +51,8 @@
     <string name="_21_00">21:00</string>
     <string name="_22_00">22:00</string>
     <string name="settings">settings</string>
+    <string name="select">Select</string>
+    <string name="search">search</string>
+    <string name="incorrect">Incorrect</string>
+    <string name="url_yandex_weather" translatable="false"><![CDATA[https://yandex.ru/pogoda/213?utm_source=serp&utm_campaign=wizard&utm_medium=desktop&utm_content=wizard_desktop_main&utm_term=title]]></string>
 </resources>
