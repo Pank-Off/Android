@@ -36,17 +36,6 @@
                 tools:ignore="RtlSymmetry" />
 
             <Button
-                android:id="@+id/city"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/white"
-                android:paddingStart="10dp"
-                android:text="@string/city"
-                android:textAlignment="textStart"
-                android:textSize="16sp"
-                tools:ignore="RtlSymmetry" />
-
-            <Button
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/white"

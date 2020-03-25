@@ -9,15 +9,6 @@
     <string name="_5_u00b0">5°</string>
     <string name="_6_u00b0">6°</string>
     <string name="_4_u00b0">4°</string>
-    <string name="tokio">Tokio</string>
-    <string name="paris">Paris</string>
-    <string name="ny">NY</string>
-    <string name="kiev">Kiev</string>
-    <string name="berlin">Berlin</string>
-    <string name="madrid">Madrid</string>
-    <string name="istambul">Istambul</string>
-    <string name="london">London</string>
-    <string name="tallinn">Tallinn</string>
     <string name="city">City</string>
     <string name="input_current_city">Input current city</string>
     <string name="wind">Wind</string>
@@ -53,6 +44,6 @@
     <string name="settings">settings</string>
     <string name="select">Select</string>
     <string name="search">search</string>
-    <string name="incorrect">Incorrect</string>
     <string name="url_yandex_weather" translatable="false"><![CDATA[https://yandex.ru/pogoda/213?utm_source=serp&utm_campaign=wizard&utm_medium=desktop&utm_content=wizard_desktop_main&utm_term=title]]></string>
+    <string name="details">Details</string>
 </resources>

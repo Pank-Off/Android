@@ -31,7 +31,6 @@ public class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.d(getClass().getSimpleName() + " - LifeCycle", "onResume");
-
     }
 
 
@@ -39,7 +38,6 @@ public class BaseActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Log.d(getClass().getSimpleName() + " - LifeCycle", "onPause");
-
     }
 
     @Override
@@ -72,7 +70,6 @@ public class BaseActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         Log.d(getClass().getSimpleName() + " - LifeCycle", "onRestart");
-
     }
 
     @Override
