@@ -2,30 +2,28 @@ package com.mailru.weather_app;
 
 import android.graphics.drawable.Drawable;
 
-import java.io.Serializable;
+public class DataWeather {
 
-class DataWeather implements Serializable {
-
-    private static DataWeather dataWeather;
+    private String day;
+    private Drawable img;
     private String grad;
-    private transient Drawable img;
 
-    private DataWeather(Drawable img, String grad) {
-        this.grad = grad;
+    public DataWeather(String day, Drawable img, String grad) {
+        this.day = day;
         this.img = img;
+        this.grad = grad;
     }
 
-    String getGrad() {
-        return grad;
+    String getDay() {
+        return day;
     }
 
     Drawable getImg() {
         return img;
     }
 
-    static DataWeather getInstance(Drawable img, String grad) {
-        if (dataWeather == null)
-            dataWeather = new DataWeather(img, grad);
-        return dataWeather;
+    String getGrad() {
+        return grad;
     }
+
 }

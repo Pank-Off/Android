@@ -6,20 +6,22 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.mailru.weather_app.R;
+import com.mailru.weather_app.RecyclerCityAdapter;
 import com.mailru.weather_app.WeatherActivity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class CitiesFragment extends Fragment {
@@ -27,7 +29,10 @@ public class CitiesFragment extends Fragment {
     private int currentPosition;
     private Button selectBtn;
     private EditText inputCity;
-    private ListView listView;
+    private RecyclerView listView;
+    private RecyclerCityAdapter adapter;
+
+    static ArrayList<String> city = new ArrayList<>(Arrays.asList("Moscow", "Tokio", "NY"));
 
     @Nullable
     @Override
@@ -68,30 +73,22 @@ public class CitiesFragment extends Fragment {
     }
 
     private void initList() {
-        ArrayAdapter adapter =
-                ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.cities,
-                        android.R.layout.simple_list_item_activated_1);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener((parent, view1, position, id) -> {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        listView.setLayoutManager(linearLayoutManager);
+        adapter = new RecyclerCityAdapter(city, (int position) -> {
             currentPosition = position;
             showWeather();
         });
+        listView.setAdapter(adapter);
     }
 
     private void setOnSelectClickListener() {
-        final String[] cities = getResources().getStringArray(R.array.cities);
         selectBtn.setOnClickListener(v -> {
-            if (inputCity.getText() != null) {
+            if (!inputCity.getText().toString().equals("")) {
                 String selected_city = inputCity.getText().toString();
-                for (int i = 0; i < cities.length; i++) {
-                    if (cities[i].equals(selected_city)) {
-                        currentPosition = i;
-                        showWeather();
-                        return;
-                    }
-                }
-                Toast.makeText(getContext(), "Not exist in city list below", Toast.LENGTH_SHORT).show();
+                currentPosition = adapter.selectBtn(selected_city);
+                inputCity.setText("");
+                showWeather();
             }
         });
     }

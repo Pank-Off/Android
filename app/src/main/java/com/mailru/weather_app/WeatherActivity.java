@@ -19,7 +19,6 @@ public class WeatherActivity extends BaseActivity {
             return;
         }
         if (savedInstanceState == null) {
-
             WeatherFragment detail = new WeatherFragment();
             detail.setArguments(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, detail).commit();
