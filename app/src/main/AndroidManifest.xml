@@ -18,11 +18,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".CityActivity" />
-
         <activity android:name=".SettingsActivity" />
 
         <activity android:name=".BaseActivity" />
+        <activity android:name=".WeatherActivity" />
     </application>
 
 </manifest>

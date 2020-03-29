@@ -13,15 +13,6 @@
     <string name="_4_u00b0">4°</string>
 
     <!--CityActivity-->
-    <string name="tokio">Токио</string>
-    <string name="paris">Париж</string>
-    <string name="ny">Нью - Йорк</string>
-    <string name="kiev">Киев</string>
-    <string name="berlin">Берлин</string>
-    <string name="madrid">Мадрид</string>
-    <string name="istambul">Стамбул</string>
-    <string name="london">Лондон</string>
-    <string name="tallinn">Таллин</string>
     <string name="city">Город</string>
     <string name="input_current_city">Введите город</string>
     <string name="wind">Ветер</string>
@@ -64,5 +55,5 @@
     <string name="select">Выбрать</string>
 
     <string name="search">Искать</string>
-    <string name="incorrect">Некорректный ввод</string>
+    <string name="details">Детали</string>
 </resources>
