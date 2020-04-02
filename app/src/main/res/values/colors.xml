@@ -6,4 +6,6 @@
     <color name="colorSky">#7FC7FF</color>
     <color name="colorCitySky">#87ceeb</color>
     <color name="white">#ffffff</color>
+    <color name="colorFiolet">#673AB7</color>
+    <color name="colorBlack">#000000</color>
 </resources>
