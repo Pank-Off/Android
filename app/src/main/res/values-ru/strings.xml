@@ -56,4 +56,7 @@
 
     <string name="search">Искать</string>
     <string name="details">Детали</string>
+    <string name="developers">Разработчики</string>
+    <string name="ok">Ok</string>
+    <string name="off">Off</string>
 </resources>

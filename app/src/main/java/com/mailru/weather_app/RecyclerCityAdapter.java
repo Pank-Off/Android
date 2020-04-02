@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -48,8 +48,8 @@ public class RecyclerCityAdapter extends RecyclerView.Adapter<RecyclerCityAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.textView.setText(data.get(position));
-        holder.textView.setOnClickListener(v -> {
+        holder.buttonView.setText(data.get(position));
+        holder.buttonView.setOnClickListener(v -> {
             selectedPosition = position;
             notifyDataSetChanged();
         });
@@ -62,10 +62,10 @@ public class RecyclerCityAdapter extends RecyclerView.Adapter<RecyclerCityAdapte
     private void highLightSelectedPosition(@NonNull ViewHolder holder, int position) {
         if (position == selectedPosition) {
             int color = ContextCompat.getColor(context, R.color.colorCitySky);
-            holder.textView.setBackgroundColor(color);
+            holder.buttonView.setBackgroundColor(color);
         } else {
             int color = ContextCompat.getColor(context, android.R.color.transparent);
-            holder.textView.setBackgroundColor(color);
+            holder.buttonView.setBackgroundColor(color);
         }
     }
 
@@ -75,12 +75,12 @@ public class RecyclerCityAdapter extends RecyclerView.Adapter<RecyclerCityAdapte
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+        Button buttonView;
         OnItemClickListener listener;
 
         ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
-            textView = itemView.findViewById(R.id.item_city);
+            buttonView = itemView.findViewById(R.id.item_city);
             this.listener = listener;
         }
     }

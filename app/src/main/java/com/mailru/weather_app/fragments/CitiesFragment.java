@@ -6,8 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +15,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 import com.mailru.weather_app.R;
 import com.mailru.weather_app.RecyclerCityAdapter;
 import com.mailru.weather_app.WeatherActivity;
@@ -23,21 +25,25 @@ import com.mailru.weather_app.WeatherActivity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class CitiesFragment extends Fragment {
     private boolean isExistWeather;
     private int currentPosition;
-    private Button selectBtn;
-    private EditText inputCity;
+    private MaterialButton selectBtn;
+    private TextInputEditText inputCity;
     private RecyclerView listView;
     private RecyclerCityAdapter adapter;
 
+
     static ArrayList<String> city = new ArrayList<>(Arrays.asList("Moscow", "Tokio", "NY"));
+
+    private Pattern correctCity = Pattern.compile("^[A-Z][a-z]{2,}$");
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.list_layout, container, false);
+        return inflater.inflate(R.layout.city_layout, container, false);
     }
 
     @Override
@@ -84,13 +90,43 @@ public class CitiesFragment extends Fragment {
 
     private void setOnSelectClickListener() {
         selectBtn.setOnClickListener(v -> {
-            if (!inputCity.getText().toString().equals("")) {
-                String selected_city = inputCity.getText().toString();
-                currentPosition = adapter.selectBtn(selected_city);
-                inputCity.setText("");
-                showWeather();
+
+
+            boolean correctInput = validate(inputCity, correctCity);
+            boolean emptyString = Objects.requireNonNull(inputCity.getText()).toString().equals("");
+            if (!emptyString && correctInput) {
+
+                Snackbar.make(v, "Are you sure?", Snackbar.LENGTH_LONG).setAction("yes", v1 -> {
+                    String selected_city = inputCity.getText().toString();
+                    currentPosition = adapter.selectBtn(selected_city);
+                    inputCity.setText("");
+                    showWeather();
+                }).show();
+
             }
         });
+    }
+
+
+    private boolean validate(TextView tv, Pattern check) {
+        String value = tv.getText().toString();
+        if (check.matcher(value).matches()) {    // Проверим на основе регулярных выражений
+            hideError(tv);
+            return true;
+        } else {
+            showError(tv);
+            return false;
+        }
+    }
+
+    // Показать ошибку
+    private void showError(TextView view) {
+        view.setError("Неверный формат города!");
+    }
+
+    // спрятать ошибку
+    private void hideError(TextView view) {
+        view.setError(null);
     }
 
     private void showWeather() {

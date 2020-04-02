@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,13 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mailru.weather_app.DataWeather;
 import com.mailru.weather_app.R;
 import com.mailru.weather_app.RecyclerWeekendAdapter;
-import com.mailru.weather_app.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class WeatherFragment extends Fragment {
-    private ImageView settings_img;
     private TextView textView;
     private CheckBox details_checkbox;
     private TextView detailsText;
@@ -58,7 +55,6 @@ public class WeatherFragment extends Fragment {
         initData();
         initViews(view);
         setTextCity();
-        setOnImageClickListener();
         setOnCheckedChangeListener();
         setOnSearchLayClickListener();
     }
@@ -105,7 +101,6 @@ public class WeatherFragment extends Fragment {
 
     private void initViews(View view) {
         textView = view.findViewById(R.id.city);
-        settings_img = view.findViewById(R.id.settings);
         details_checkbox = view.findViewById(R.id.details_checkbox);
         detailsText = view.findViewById(R.id.detailsText);
         weatherLay = view.findViewById(R.id.firstLay);
@@ -121,13 +116,6 @@ public class WeatherFragment extends Fragment {
         recyclerViewHour.setAdapter(new RecyclerWeekendAdapter(dataWeathersHour));
     }
 
-    private void setOnImageClickListener() {
-        settings_img.setOnClickListener(v -> {
-            Intent intent = new Intent();
-            intent.setClass(Objects.requireNonNull(getActivity()), SettingsActivity.class);
-            startActivity(intent);
-        });
-    }
 
     private void setOnCheckedChangeListener() {
         details_checkbox.setOnCheckedChangeListener((buttonView, isChecked) -> {

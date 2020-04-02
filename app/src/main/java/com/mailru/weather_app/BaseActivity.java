@@ -1,7 +1,11 @@
 package com.mailru.weather_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -77,4 +81,30 @@ public class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         Log.d(getClass().getSimpleName() + " - LifeCycle", "onDestroy");
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.developers:
+                Toast.makeText(getApplicationContext(), "Developers", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.settings:
+                setOnSettingsClickListener();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void setOnSettingsClickListener() {
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+        startActivity(intent);
+    }
 }
+
