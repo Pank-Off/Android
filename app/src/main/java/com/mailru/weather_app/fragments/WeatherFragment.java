@@ -89,8 +89,12 @@ public class WeatherFragment extends Fragment {
             public void run() {
                 final JSONObject jsonObject = WeatherDataLoader.getJSONData(currentCity);
                 if (jsonObject == null) {
-                    handler.post(() ->
-                            Toast.makeText(getContext(), R.string.place_not_found, Toast.LENGTH_LONG).show());
+                    handler.post(() -> {
+                        if (getContext() != null) {
+                            Toast.makeText(getContext(), R.string.place_not_found, Toast.LENGTH_LONG).show();
+                        }
+                    });
+
                 } else {
                     handler.post(() -> renderWeather(jsonObject));
                 }
@@ -106,7 +110,7 @@ public class WeatherFragment extends Fragment {
                 final JSONObject jsonObject = WeatherDataWeekendLoader.getJSONData(currentCity);
                 if (jsonObject == null) {
                     handler.post(() ->
-                            Toast.makeText(getContext(), R.string.place_not_found, Toast.LENGTH_LONG).show());
+                            Log.d(LOG_TAG, "json: "));
                 } else {
                     handler.post(() -> renderWeekWeather(jsonObject));
                 }
