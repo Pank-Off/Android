@@ -29,27 +29,37 @@
                     style="@style/MainCity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/moscow" />
+                    tools:text="@string/moscow" />
 
                 <TextView
+                    android:id="@+id/currentTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/wed_10_march_14_04"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    tools:text="@string/wed_10_march_14_04" />
 
                 <TextView
-                    android:id="@+id/weatherToday"
-                    style="@style/MainGrad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/_8_u00b0" />
-
-                <TextView
+                    android:id="@+id/icon_weather"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="@string/cloudy"
-                    android:textSize="24sp" />
+                    android:textSize="120sp"
+                    tools:text="@string/weather_cloudy" />
+
+                <TextView
+                    android:id="@+id/weatherTodayView"
+                    style="@style/MainGrad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    tools:text="@string/_8_u00b0" />
+
+                <TextView
+                    android:id="@+id/weatherText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="24sp"
+                    tools:text="@string/cloudy" />
 
                 <CheckBox
                     android:id="@+id/details_checkbox"
@@ -62,28 +72,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10sp" />
-
-
             </LinearLayout>
 
             <TextView
                 style="@style/HourlyAndWeekend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/daily" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/HourRecycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorCitySky" />
-
-            <TextView
-                style="@style/HourlyAndWeekend"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
-                android:text="@string/hourly" />
+                tools:text="@string/hourly" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/weekendRecycler"

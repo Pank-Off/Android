@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +22,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.mailru.weather_app.R;
 import com.mailru.weather_app.RecyclerCityAdapter;
 import com.mailru.weather_app.WeatherActivity;
+import com.mailru.weather_app.WeatherDataWeekendLoader;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,13 +34,14 @@ import java.util.regex.Pattern;
 public class CitiesFragment extends Fragment {
     private boolean isExistWeather;
     private int currentPosition;
+    private String selectedCity;
     private MaterialButton selectBtn;
     private TextInputEditText inputCity;
     private RecyclerView listView;
     private RecyclerCityAdapter adapter;
+    private boolean isChecked;
 
-
-    static ArrayList<String> city = new ArrayList<>(Arrays.asList("Moscow", "Tokio", "NY"));
+    private static ArrayList<String> city = new ArrayList<>(Arrays.asList("Moscow", "Tokio", "Paris"));
 
     private Pattern correctCity = Pattern.compile("^[A-Z][a-z]{2,}$");
 
@@ -66,6 +71,7 @@ public class CitiesFragment extends Fragment {
         isExistWeather = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
         if (savedInstanceState != null) {
             currentPosition = savedInstanceState.getInt("CurrentCity", 0);
+            selectedCity = savedInstanceState.getString("CurrentCity", null);
         }
         if (isExistWeather) {
             showWeather();
@@ -75,6 +81,7 @@ public class CitiesFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putInt("CurrentCity", currentPosition);
+        outState.putString("CurrentCity", selectedCity);
         super.onSaveInstanceState(outState);
     }
 
@@ -83,34 +90,34 @@ public class CitiesFragment extends Fragment {
         listView.setLayoutManager(linearLayoutManager);
         adapter = new RecyclerCityAdapter(city, (int position) -> {
             currentPosition = position;
-            showWeather();
+            selectedCity = city.get(currentPosition);
+            if (checkJson(selectedCity)) {
+                showWeather();
+            } else {
+                Toast.makeText(getContext(), "Unavailabe network", Toast.LENGTH_LONG).show();
+            }
         });
         listView.setAdapter(adapter);
     }
 
     private void setOnSelectClickListener() {
         selectBtn.setOnClickListener(v -> {
-
-
             boolean correctInput = validate(inputCity, correctCity);
             boolean emptyString = Objects.requireNonNull(inputCity.getText()).toString().equals("");
             if (!emptyString && correctInput) {
-
                 Snackbar.make(v, "Are you sure?", Snackbar.LENGTH_LONG).setAction("yes", v1 -> {
-                    String selected_city = inputCity.getText().toString();
-                    currentPosition = adapter.selectBtn(selected_city);
+                    selectedCity = inputCity.getText().toString();
+                    currentPosition = adapter.selectBtn(selectedCity);
                     inputCity.setText("");
                     showWeather();
                 }).show();
-
             }
         });
     }
 
-
     private boolean validate(TextView tv, Pattern check) {
         String value = tv.getText().toString();
-        if (check.matcher(value).matches()) {    // Проверим на основе регулярных выражений
+        if (check.matcher(value).matches() && checkJson(value)) {
             hideError(tv);
             return true;
         } else {
@@ -118,6 +125,25 @@ public class CitiesFragment extends Fragment {
             return false;
         }
     }
+
+    private boolean checkJson(String value) {
+        isChecked = false;
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                final JSONObject jsonObject = WeatherDataWeekendLoader.getJSONData(value);
+                isChecked = jsonObject != null;
+            }
+        };
+        t.start();
+        try {
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isChecked;
+    }
+
 
     // Показать ошибку
     private void showError(TextView view) {
@@ -130,10 +156,12 @@ public class CitiesFragment extends Fragment {
     }
 
     private void showWeather() {
+
         if (isExistWeather) {
             WeatherFragment detail = (WeatherFragment) Objects.requireNonNull(getFragmentManager()).findFragmentById(R.id.fragment);
-            if (detail == null || detail.getIndex() != currentPosition) {
-                detail = WeatherFragment.create(currentPosition);
+            if (detail == null || detail.getIndex() != currentPosition || detail.getIndex() == 0) {
+
+                detail = WeatherFragment.create(currentPosition, selectedCity);
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, detail);
                 fragmentTransaction.commit();
@@ -142,7 +170,9 @@ public class CitiesFragment extends Fragment {
             Intent intent = new Intent();
             intent.setClass(Objects.requireNonNull(getActivity()), WeatherActivity.class);
             intent.putExtra("index", currentPosition);
+            intent.putExtra("index", selectedCity);
             startActivity(intent);
         }
     }
+
 }

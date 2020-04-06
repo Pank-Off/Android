@@ -51,4 +51,17 @@
     <string name="developers">Developers</string>
     <string name="ok">OK</string>
     <string name="off">Off</string>
+
+    <string name="place_not_found">Place not found or unavailable network</string>
+    <string name="unavailable_network">Unavailable network</string>
+
+    <string name="weather_sunny" translatable="false">&#xf00d;</string>
+    <string name="weather_clear_night" translatable="false">&#xf02e;</string>
+    <string name="weather_foggy" translatable="false">&#xf014;</string>
+    <string name="weather_cloudy" translatable="false">&#xf013;</string>
+    <string name="weather_rainy" translatable="false">&#xf019;</string>
+    <string name="weather_snowy" translatable="false">&#xf01b;</string>
+    <string name="weather_thunder" translatable="false">&#xf01e;</string>
+    <string name="weather_drizzle" translatable="false">&#xf01c;</string>
+
 </resources>

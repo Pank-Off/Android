@@ -59,4 +59,7 @@
     <string name="developers">Разработчики</string>
     <string name="ok">Ok</string>
     <string name="off">Off</string>
+
+    <string name="place_not_found">Интернет недоступен или локация не найдена</string>
+    <string name="unavailable_network">Интернет недоступен</string>
 </resources>

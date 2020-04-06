@@ -21,7 +21,6 @@ public class SettingsActivity extends BaseActivity {
         initList();
     }
 
-
     private void initViews() {
         settings_list = findViewById(R.id.settings_list_view);
     }
@@ -37,14 +36,12 @@ public class SettingsActivity extends BaseActivity {
         data.add(getResources().getString(R.string.add_weather_icon));
         data.add(getResources().getString(R.string.customization_service));
         data.add(getResources().getString(R.string.about_weather));
-
     }
 
     private void initList() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         settings_list.setLayoutManager(linearLayoutManager);
         RecyclerCityAdapter adapter = new RecyclerCityAdapter(data, (int position) -> {
-
         });
         settings_list.setAdapter(adapter);
     }
