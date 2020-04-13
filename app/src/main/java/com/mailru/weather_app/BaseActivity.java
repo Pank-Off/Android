@@ -10,6 +10,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -50,20 +53,6 @@ public class BaseActivity extends AppCompatActivity {
         Log.d(getClass().getSimpleName() + " - LifeCycle", "onSaveInstanceState");
     }
 
-    /**
-     * Должно рабоать при явном прописании в манифесте android:configChanges="orientation"
-     * но у меня не вызывается метод =(
-     *
-     * @Override public void onConfigurationChanged(@NonNull Configuration newConfig) {
-     * super.onConfigurationChanged(newConfig);
-     * Log.d(getClass().getSimpleName() + " - LifeCycle", "onConfigurationChanged");
-     * if (Configuration.ORIENTATION_LANDSCAPE == newConfig.orientation)
-     * Toast.makeText(this, "Orientation Landscape", Toast.LENGTH_SHORT).show();
-     * else if (Configuration.ORIENTATION_PORTRAIT == newConfig.orientation)
-     * Toast.makeText(this, "Orientation Portrait", Toast.LENGTH_SHORT).show();
-     * }
-     */
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -80,31 +69,6 @@ public class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(getClass().getSimpleName() + " - LifeCycle", "onDestroy");
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.developers:
-                Toast.makeText(getApplicationContext(), "Developers", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.settings:
-                setOnSettingsClickListener();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    private void setOnSettingsClickListener() {
-        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-        startActivity(intent);
     }
 }
 

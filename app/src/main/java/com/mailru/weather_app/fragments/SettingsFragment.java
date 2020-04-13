@@ -1,28 +1,47 @@
-package com.mailru.weather_app;
+package com.mailru.weather_app.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.mailru.weather_app.R;
+import com.mailru.weather_app.RecyclerCityAdapter;
 
-public class SettingsActivity extends BaseActivity {
+import java.util.ArrayList;
+import java.util.Objects;
+
+public class SettingsFragment extends Fragment {
 
     private RecyclerView settings_list;
     private ArrayList<String> data = new ArrayList<>();
+    private Context context;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        context = Objects.requireNonNull(container).getContext();
+        return inflater.inflate(R.layout.settings_layout, container, false);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
-        initViews();
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initViews(view);
         initData();
         initList();
     }
 
-    private void initViews() {
-        settings_list = findViewById(R.id.settings_list_view);
+    private void initViews(View view) {
+        settings_list = view.findViewById(R.id.settings_list_view);
     }
 
     private void initData() {
@@ -39,7 +58,7 @@ public class SettingsActivity extends BaseActivity {
     }
 
     private void initList() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         settings_list.setLayoutManager(linearLayoutManager);
         RecyclerCityAdapter adapter = new RecyclerCityAdapter(data, (int position) -> {
         });

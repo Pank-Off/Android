@@ -1,5 +1,6 @@
 package com.mailru.weather_app.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -11,8 +12,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -158,6 +161,7 @@ public class CitiesFragment extends Fragment {
     private void showWeather() {
 
         if (isExistWeather) {
+
             WeatherFragment detail = (WeatherFragment) Objects.requireNonNull(getFragmentManager()).findFragmentById(R.id.fragment);
             if (detail == null || detail.getIndex() != currentPosition || detail.getIndex() == 0) {
 
@@ -166,12 +170,12 @@ public class CitiesFragment extends Fragment {
                 fragmentTransaction.replace(R.id.fragment, detail);
                 fragmentTransaction.commit();
             }
-        } else {
-            Intent intent = new Intent();
-            intent.setClass(Objects.requireNonNull(getActivity()), WeatherActivity.class);
-            intent.putExtra("index", currentPosition);
-            intent.putExtra("index", selectedCity);
-            startActivity(intent);
+        }  else {
+                WeatherFragment detail = WeatherFragment.create(currentPosition, selectedCity);
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment, detail);
+                fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack("backStack");
         }
     }
 
