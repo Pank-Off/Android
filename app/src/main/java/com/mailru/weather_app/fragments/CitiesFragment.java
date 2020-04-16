@@ -1,21 +1,20 @@
 package com.mailru.weather_app.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
+import android.net.Network;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,7 +23,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mailru.weather_app.R;
 import com.mailru.weather_app.RecyclerCityAdapter;
-import com.mailru.weather_app.WeatherActivity;
 import com.mailru.weather_app.WeatherDataWeekendLoader;
 
 import org.json.JSONObject;
@@ -43,6 +41,7 @@ public class CitiesFragment extends Fragment {
     private RecyclerView listView;
     private RecyclerCityAdapter adapter;
     private boolean isChecked;
+    private Context context;
 
     private static ArrayList<String> city = new ArrayList<>(Arrays.asList("Moscow", "Tokio", "Paris"));
 
@@ -51,6 +50,7 @@ public class CitiesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        context = Objects.requireNonNull(container).getContext();
         return inflater.inflate(R.layout.city_layout, container, false);
     }
 
@@ -94,10 +94,13 @@ public class CitiesFragment extends Fragment {
         adapter = new RecyclerCityAdapter(city, (int position) -> {
             currentPosition = position;
             selectedCity = city.get(currentPosition);
+            boolean hasConnection = hasConnection();
+            if (!hasConnection) {
+                setAlert();
+                return;
+            }
             if (checkJson(selectedCity)) {
                 showWeather();
-            } else {
-                Toast.makeText(getContext(), "Unavailabe network", Toast.LENGTH_LONG).show();
             }
         });
         listView.setAdapter(adapter);
@@ -105,6 +108,11 @@ public class CitiesFragment extends Fragment {
 
     private void setOnSelectClickListener() {
         selectBtn.setOnClickListener(v -> {
+            boolean hasConnection = hasConnection();
+            if (!hasConnection) {
+                setAlert();
+                return;
+            }
             boolean correctInput = validate(inputCity, correctCity);
             boolean emptyString = Objects.requireNonNull(inputCity.getText()).toString().equals("");
             if (!emptyString && correctInput) {
@@ -116,6 +124,26 @@ public class CitiesFragment extends Fragment {
                 }).show();
             }
         });
+    }
+
+    private void setAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(R.string.unavailable_network)
+                .setMessage("Please, turn on the Internet")
+                .setIcon(R.mipmap.ic_launcher_round)
+                .setCancelable(false)
+                .setPositiveButton(R.string.ok,
+                        (dialog, id) -> {
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+
+    private boolean hasConnection() {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        Network[] networks = Objects.requireNonNull(cm).getAllNetworks();
+        return networks.length != 0;
     }
 
     private boolean validate(TextView tv, Pattern check) {
@@ -162,20 +190,20 @@ public class CitiesFragment extends Fragment {
 
         if (isExistWeather) {
 
-            WeatherFragment detail = (WeatherFragment) Objects.requireNonNull(getFragmentManager()).findFragmentById(R.id.fragment);
+            WeatherFragment detail = (WeatherFragment) Objects.requireNonNull(getParentFragmentManager()).findFragmentById(R.id.fragment);
             if (detail == null || detail.getIndex() != currentPosition || detail.getIndex() == 0) {
 
                 detail = WeatherFragment.create(currentPosition, selectedCity);
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, detail);
                 fragmentTransaction.commit();
             }
-        }  else {
-                WeatherFragment detail = WeatherFragment.create(currentPosition, selectedCity);
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.nav_host_fragment, detail);
-                fragmentTransaction.commit();
-                fragmentTransaction.addToBackStack("backStack");
+        } else {
+            WeatherFragment detail = WeatherFragment.create(currentPosition, selectedCity);
+            FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.nav_host_fragment, detail);
+            fragmentTransaction.commit();
+            fragmentTransaction.addToBackStack("backStack");
         }
     }
 
