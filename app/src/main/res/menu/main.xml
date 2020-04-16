@@ -3,7 +3,4 @@
     <item
         android:id="@+id/developers"
         android:title="@string/developers" />
-    <item
-        android:id="@+id/settings"
-        android:title="@string/settings" />
 </menu>
