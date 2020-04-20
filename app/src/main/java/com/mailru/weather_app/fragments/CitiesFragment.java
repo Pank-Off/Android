@@ -43,6 +43,7 @@ public class CitiesFragment extends Fragment {
     private boolean isChecked;
     private Context context;
 
+
     private static ArrayList<String> city = new ArrayList<>(Arrays.asList("Moscow", "Tokio", "Paris"));
 
     private Pattern correctCity = Pattern.compile("^[A-Z][a-z]{2,}$");
@@ -50,13 +51,13 @@ public class CitiesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        context = Objects.requireNonNull(container).getContext();
         return inflater.inflate(R.layout.city_layout, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        context = getContext();
         initViews(view);
         initList();
         setOnSelectClickListener();
@@ -83,9 +84,10 @@ public class CitiesFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
         outState.putInt("CurrentCity", currentPosition);
         outState.putString("CurrentCity", selectedCity);
-        super.onSaveInstanceState(outState);
+
     }
 
     private void initList() {
@@ -189,13 +191,17 @@ public class CitiesFragment extends Fragment {
     private void showWeather() {
 
         if (isExistWeather) {
-
             WeatherFragment detail = (WeatherFragment) Objects.requireNonNull(getParentFragmentManager()).findFragmentById(R.id.fragment);
             if (detail == null || detail.getIndex() != currentPosition || detail.getIndex() == 0) {
-
-                detail = WeatherFragment.create(currentPosition, selectedCity);
+                Fragment fragment = getParentFragmentManager().findFragmentById(R.id.nav_host_fragment);
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+
+                //selectedCity = "Tokio";
+                detail = WeatherFragment.create(currentPosition, selectedCity);
                 fragmentTransaction.replace(R.id.fragment, detail);
+                if (fragment != null) {
+                    fragmentTransaction.detach(fragment);
+                }
                 fragmentTransaction.commit();
             }
         } else {

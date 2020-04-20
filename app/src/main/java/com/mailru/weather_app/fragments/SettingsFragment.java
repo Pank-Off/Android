@@ -1,6 +1,5 @@
 package com.mailru.weather_app.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,18 +15,15 @@ import com.mailru.weather_app.R;
 import com.mailru.weather_app.RecyclerCityAdapter;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class SettingsFragment extends Fragment {
 
     private RecyclerView settings_list;
     private ArrayList<String> data = new ArrayList<>();
-    private Context context;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        context = Objects.requireNonNull(container).getContext();
         return inflater.inflate(R.layout.settings_layout, container, false);
     }
 
@@ -58,7 +54,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void initList() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         settings_list.setLayoutManager(linearLayoutManager);
         RecyclerCityAdapter adapter = new RecyclerCityAdapter(data, (int position) -> {
         });
