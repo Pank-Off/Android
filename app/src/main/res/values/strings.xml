@@ -64,5 +64,7 @@
     <string name="weather_thunder" translatable="false">&#xf01e;</string>
     <string name="weather_drizzle" translatable="false">&#xf01c;</string>
     <string name="weather">Weather</string>
+    <string name="changeimage">Change Image</string>
+    <string name="picasso">Picasso</string>
 
 </resources>

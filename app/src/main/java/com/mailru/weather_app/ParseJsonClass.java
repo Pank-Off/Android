@@ -17,8 +17,6 @@ import java.util.Locale;
 
 import static java.security.AccessController.getContext;
 
-
-
 public class ParseJsonClass {
 
     private Context context;
@@ -152,8 +150,6 @@ public class ParseJsonClass {
             e.printStackTrace();
         }
         return builder.toString();
-
-
     }
     private String setCurrentTemp(JSONObject main) throws JSONException {
         String currentTextText = String.format(Locale.getDefault(), "%.0f",
