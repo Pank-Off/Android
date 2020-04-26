@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +26,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.mailru.weather_app.R;
 import com.mailru.weather_app.RecyclerCityAdapter;
 import com.mailru.weather_app.WeatherDataWeekendLoader;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -42,6 +45,8 @@ public class CitiesFragment extends Fragment {
     private RecyclerCityAdapter adapter;
     private boolean isChecked;
     private Context context;
+    private MaterialButton picassoBtn;
+    private ImageView picassoImg;
 
 
     private static ArrayList<String> city = new ArrayList<>(Arrays.asList("Moscow", "Tokio", "Paris"));
@@ -61,12 +66,16 @@ public class CitiesFragment extends Fragment {
         initViews(view);
         initList();
         setOnSelectClickListener();
+        loadImageWithPicasso();
     }
 
     private void initViews(View view) {
         selectBtn = view.findViewById(R.id.selectBtn);
         inputCity = view.findViewById(R.id.inputCity);
         listView = view.findViewById(R.id.cities_list_view);
+        picassoBtn = view.findViewById(R.id.picassoBtn);
+        picassoImg = view.findViewById(R.id.picassoImg);
+
     }
 
     @Override
@@ -211,6 +220,16 @@ public class CitiesFragment extends Fragment {
             fragmentTransaction.commit();
             fragmentTransaction.addToBackStack("backStack");
         }
+    }
+
+
+    private void loadImageWithPicasso() {
+        picassoBtn.setOnClickListener(view -> {
+            Toast.makeText(getContext(), "Loading", Toast.LENGTH_SHORT).show();
+            Picasso.get()
+                    .load("https://icon-icons.com/icons2/38/PNG/128/clouds_weather_cloud_4496.png")
+                    .into(picassoImg);
+        });
     }
 
 }

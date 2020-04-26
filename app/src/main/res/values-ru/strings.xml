@@ -62,4 +62,7 @@
 
     <string name="place_not_found">Интернет недоступен или локация не найдена</string>
     <string name="unavailable_network">Интернет недоступен</string>
+
+    <string name="weather">Погода</string>
+    <string name="changeimage">Поменять картинку</string>
 </resources>
