@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mailru.weather_app.R;
-import com.mailru.weather_app.RecyclerCityAdapter;
+import com.mailru.weather_app.RecyclerAdapter;
 
 import java.util.ArrayList;
 
@@ -56,7 +56,7 @@ public class SettingsFragment extends Fragment {
     private void initList() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         settings_list.setLayoutManager(linearLayoutManager);
-        RecyclerCityAdapter adapter = new RecyclerCityAdapter(data, (int position) -> {
+        RecyclerAdapter adapter = new RecyclerAdapter(data, (int position) -> {
         });
         settings_list.setAdapter(adapter);
     }

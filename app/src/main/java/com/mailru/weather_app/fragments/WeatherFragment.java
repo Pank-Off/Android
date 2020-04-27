@@ -1,5 +1,6 @@
 package com.mailru.weather_app.fragments;
 
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +25,13 @@ import com.mailru.weather_app.ParseJsonRestClass;
 import com.mailru.weather_app.R;
 import com.mailru.weather_app.RecyclerWeekendAdapter;
 import com.mailru.weather_app.entities.WeatherRequestRestModel;
-
+import androidx.preference.PreferenceManager;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,7 +52,8 @@ public class WeatherFragment extends Fragment {
     private RecyclerView recyclerViewWeek;
     private ArrayList<DataWeather> dataWeathers;
     private String currentCity;
-
+    private SharedPreferences defalutPrefs;
+    private String savePrefKey = "savePref";
 
     private final static String LOG_TAG = WeatherFragment.class.getSimpleName();
 
@@ -77,16 +81,34 @@ public class WeatherFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initViews(view);
-        currentCity = requireArguments().getString("index");
+defalutPrefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        try {
+            currentCity = requireArguments().getString("index", null);
+        } catch (IllegalStateException e) {
+           currentCity = readFromPreference(defalutPrefs);
+          //  currentCity = "Moscow";
+        }
+
+
         parseJsonClass = new ParseJsonClass(currentCity, getContext());
-        parseJsonRestClass = new ParseJsonRestClass(currentCity,getContext());
+        parseJsonRestClass = new ParseJsonRestClass(currentCity, getContext());
         initFonts();
         updateWeatherWeekData();
-       // updateWeatherTodayData();
+        // updateWeatherTodayData();
         //updateWeatherTodayDataRest();
         updateWeatherData();
-        Log.d(getClass().getSimpleName() + " - LifeCycle", "AfterEverything");
+    }
 
+
+    private void saveToPreference(SharedPreferences preferences) {
+
+        SharedPreferences.Editor editor = preferences.edit();
+        String text = currentCity;
+        editor.putString(savePrefKey,text);
+        editor.apply();
+    }
+    private String readFromPreference(SharedPreferences preferences) {
+        return preferences.getString(savePrefKey,"Moscow");
 
     }
 
@@ -100,8 +122,8 @@ public class WeatherFragment extends Fragment {
 
         List<String> list = parseJsonClass.updateWeatherTodayData();
         //Это заглушка на время, чтобы пережить поворот!
-        if(list.size()==0){
-            for(int i = 0;i<=5;i++){
+        if (list.size() == 0) {
+            for (int i = 0; i <= 5; i++) {
                 list.add(null);
             }
         }
@@ -127,8 +149,8 @@ public class WeatherFragment extends Fragment {
         List<String> list = parseJsonRestClass.updateWeatherTodayData();
 
         //Это заглушка на время, чтобы пережить поворот!
-        if(list.size()==0){
-            for(int i = 0;i<=5;i++){
+        if (list.size() == 0) {
+            for (int i = 0; i <= 5; i++) {
                 list.add(null);
             }
         }
@@ -162,26 +184,25 @@ public class WeatherFragment extends Fragment {
         iconWeather = view.findViewById(R.id.icon_weather);
         currentTime = view.findViewById(R.id.currentTime);
         recyclerViewWeek = view.findViewById(R.id.weekendRecycler);
-
     }
 
 
-    private void updateWeatherData(){
+    private void updateWeatherData() {
         OpenWeatherRepo.getSingleton().getAPI().loadWeather(currentCity,
                 "8e4427442db813060908d56bee675cb7", "metric")
                 .enqueue(new Callback<WeatherRequestRestModel>() {
                     @Override
                     public void onResponse(@NonNull Call<WeatherRequestRestModel> call,
                                            @NonNull Response<WeatherRequestRestModel> response) {
-                        Log.d("response.body", response.body() +"");
-                        Log.d("response.isSuccessful", response.isSuccessful() +"");
+                        Log.d("response.body", response.body() + "");
+                        Log.d("response.isSuccessful", response.isSuccessful() + "");
                         if (response.body() != null && response.isSuccessful()) {
                             renderWeather(response.body());
 
                         } else {
                             //Похоже, код у нас не в диапазоне [200..300) и случилась ошибка
                             //обрабатываем ее
-                            Log.d("code ", response.code()+"");
+                            Log.d("code ", response.code() + "");
                             if (response.code() == 500) {
                                 Log.d("code 500", "Internal Server Error");
                                 //ой, случился Internal Server Error. Решаем проблему
@@ -251,7 +272,7 @@ public class WeatherFragment extends Fragment {
                     break;
                 }
                 case 5: {
-                    icon =getString(R.string.weather_rainy);
+                    icon = getString(R.string.weather_rainy);
                     break;
                 }
                 case 6: {
@@ -270,5 +291,13 @@ public class WeatherFragment extends Fragment {
         }
         return icon;
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(getClass().getSimpleName() + " - LifeCycle", "onStopFrag");
+        saveToPreference(defalutPrefs);
+    }
+
 }
 
