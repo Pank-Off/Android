@@ -1,6 +1,7 @@
 package com.mailru.weather_app.fragments;
 
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,7 +27,9 @@ import com.mailru.weather_app.ParseJsonRestClass;
 import com.mailru.weather_app.R;
 import com.mailru.weather_app.RecyclerWeekendAdapter;
 import com.mailru.weather_app.entities.WeatherRequestRestModel;
+
 import androidx.preference.PreferenceManager;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -73,6 +77,8 @@ public class WeatherFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        Log.d(getClass().getSimpleName() + " - LifeCycle", "onCreateView");
         return inflater.inflate(R.layout.weather_layout, container, false);
     }
 
@@ -81,14 +87,12 @@ public class WeatherFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initViews(view);
-defalutPrefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        defalutPrefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
         try {
             currentCity = requireArguments().getString("index", null);
         } catch (IllegalStateException e) {
-           currentCity = readFromPreference(defalutPrefs);
-          //  currentCity = "Moscow";
+            currentCity = readFromPreference(defalutPrefs);
         }
-
 
         parseJsonClass = new ParseJsonClass(currentCity, getContext());
         parseJsonRestClass = new ParseJsonRestClass(currentCity, getContext());
@@ -99,16 +103,16 @@ defalutPrefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
         updateWeatherData();
     }
 
-
     private void saveToPreference(SharedPreferences preferences) {
 
         SharedPreferences.Editor editor = preferences.edit();
         String text = currentCity;
-        editor.putString(savePrefKey,text);
+        editor.putString(savePrefKey, text);
         editor.apply();
     }
+
     private String readFromPreference(SharedPreferences preferences) {
-        return preferences.getString(savePrefKey,"Moscow");
+        return preferences.getString(savePrefKey, "Moscow");
 
     }
 
@@ -217,8 +221,8 @@ defalutPrefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
                     //сбой при интернет подключении
                     @Override
                     public void onFailure(Call<WeatherRequestRestModel> call, Throwable t) {
-                        Toast.makeText(getContext(), getString(R.string.unavailable_network),
-                                Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), getString(R.string.unavailable_network),
+//                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }

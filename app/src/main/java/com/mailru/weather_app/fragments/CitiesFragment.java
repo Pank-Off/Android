@@ -1,24 +1,22 @@
 package com.mailru.weather_app.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,14 +24,11 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mailru.weather_app.App;
-import com.mailru.weather_app.MainActivity;
 import com.mailru.weather_app.R;
 import com.mailru.weather_app.RecyclerCityDBAdapter;
-import com.mailru.weather_app.WeatherActivity;
 import com.mailru.weather_app.WeatherDataWeekendLoader;
 import com.mailru.weather_app.room.CityDao;
 import com.mailru.weather_app.room.CitySource;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -41,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Pattern;
+import java.util.zip.Inflater;
 
 public class CitiesFragment extends Fragment {
     private boolean isExistWeather;
@@ -67,7 +63,49 @@ public class CitiesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d(getClass().getSimpleName() + " - LifeCycle", "onCreateView");
+
         return inflater.inflate(R.layout.city_layout, container, false);
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        Log.d(getClass().getSimpleName() + " - LifeCycle", "onConfigChange");
+        super.onConfigurationChanged(newConfig);
+
+
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        populateViewForOrientation(inflater, (ViewGroup) requireView());
+    }
+
+    private void populateViewForOrientation(LayoutInflater inflater, ViewGroup viewGroup) {
+        viewGroup.removeAllViewsInLayout();
+        View subview = inflater.inflate(R.layout.city_layout, viewGroup);
+        initViews(subview);
+        initList();
+        setOnSelectClickListener();
+
+        // Find your buttons in subview, set up onclicks, set up callbacks to your parent fragment or activity here.
+
+        // You can create ViewHolder or separate method for that.
+        // example of accessing views: TextView textViewExample = (TextView) view.findViewById(R.id.text_view_example);
+        // textViewExample.setText("example");
+    }
+
+    @Override
+    public void onResume() {
+
+        Log.d(getClass().getSimpleName() + " - LifeCycle", "onResume");
+        super.onResume();
+
+    }
+
+    @Override
+    public void onPause() {
+
+        Log.d(getClass().getSimpleName() + " - LifeCycle", "onPause");
+        super.onPause();
+
     }
 
     @Override
@@ -77,6 +115,7 @@ public class CitiesFragment extends Fragment {
         initViews(view);
         initList();
         setOnSelectClickListener();
+
         // loadImageWithPicasso();
     }
 
@@ -93,6 +132,7 @@ public class CitiesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         isExistWeather = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+        Log.d(getClass().getSimpleName() + " - LifeCycle", "onActivityCreated");
         if (savedInstanceState != null) {
             currentPosition = savedInstanceState.getInt("CurrentCity", 0);
             selectedCity = savedInstanceState.getString("CurrentCity", null);
@@ -107,7 +147,6 @@ public class CitiesFragment extends Fragment {
         super.onSaveInstanceState(outState);
         outState.putInt("CurrentCity", currentPosition);
         outState.putString("CurrentCity", selectedCity);
-
     }
 
     private void initList() {
@@ -215,19 +254,15 @@ public class CitiesFragment extends Fragment {
     private void showWeather() {
 
         if (isExistWeather) {
-            WeatherFragment detail = (WeatherFragment) Objects.requireNonNull(getParentFragmentManager()).findFragmentById(R.id.fragment);
+            WeatherFragment detail = (WeatherFragment) Objects.requireNonNull(getParentFragmentManager()).findFragmentById(R.id.fragmentWeather);
             if (detail == null || detail.getIndex() != currentPosition || detail.getIndex() == 0) {
-                Fragment fragment = getParentFragmentManager().findFragmentById(R.id.nav_host_fragment);
+
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
 
                 detail = WeatherFragment.create(currentPosition, selectedCity);
 
-                //  fragmentTransaction.replace(R.id.fragment, detail);  //Ошибка здесь (одна из)
+                fragmentTransaction.replace(R.id.fragmentWeather, detail);
 
-
-                if (fragment != null) {
-                    fragmentTransaction.detach(fragment);
-                }
                 fragmentTransaction.commit();
             }
         } else {
@@ -235,10 +270,9 @@ public class CitiesFragment extends Fragment {
             FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.nav_host_fragment, detail);
             fragmentTransaction.commit();
-            fragmentTransaction.addToBackStack("backStack");
+            fragmentTransaction.addToBackStack(null);
         }
     }
-
 
 //    private void loadImageWithPicasso() {
 //        picassoBtn.setOnClickListener(view -> {

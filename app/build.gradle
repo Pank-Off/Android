@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -41,6 +42,9 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation "androidx.preference:preference:1.1.1"
     implementation "android.arch.persistence.room:runtime:1.1.1"
+    implementation 'com.google.firebase:firebase-messaging:20.1.6'
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
 
 }
+
+apply plugin: 'com.google.gms.google-services'
