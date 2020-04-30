@@ -1,6 +1,7 @@
 package com.mailru.weather_app.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.Network;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,9 +25,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.mailru.weather_app.App;
+import com.mailru.weather_app.MainActivity;
 import com.mailru.weather_app.R;
-import com.mailru.weather_app.RecyclerCityAdapter;
+import com.mailru.weather_app.RecyclerCityDBAdapter;
+import com.mailru.weather_app.WeatherActivity;
 import com.mailru.weather_app.WeatherDataWeekendLoader;
+import com.mailru.weather_app.room.CityDao;
+import com.mailru.weather_app.room.CitySource;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
@@ -42,14 +49,18 @@ public class CitiesFragment extends Fragment {
     private MaterialButton selectBtn;
     private TextInputEditText inputCity;
     private RecyclerView listView;
-    private RecyclerCityAdapter adapter;
+    private RecyclerCityDBAdapter adapter;
+
     private boolean isChecked;
     private Context context;
-    private MaterialButton picassoBtn;
-    private ImageView picassoImg;
+
+    // private MaterialButton picassoBtn;
+    //  private ImageView picassoImg;
 
 
     private static ArrayList<String> city = new ArrayList<>(Arrays.asList("Moscow", "Tokio", "Paris"));
+    private static CityDao cityDao = App.getInstance().getCityDao();
+
 
     private Pattern correctCity = Pattern.compile("^[A-Z][a-z]{2,}$");
 
@@ -66,15 +77,15 @@ public class CitiesFragment extends Fragment {
         initViews(view);
         initList();
         setOnSelectClickListener();
-        loadImageWithPicasso();
+        // loadImageWithPicasso();
     }
 
     private void initViews(View view) {
         selectBtn = view.findViewById(R.id.selectBtn);
         inputCity = view.findViewById(R.id.inputCity);
         listView = view.findViewById(R.id.cities_list_view);
-        picassoBtn = view.findViewById(R.id.picassoBtn);
-        picassoImg = view.findViewById(R.id.picassoImg);
+        // picassoBtn = view.findViewById(R.id.picassoBtn);
+        //  picassoImg = view.findViewById(R.id.picassoImg);
 
     }
 
@@ -102,9 +113,12 @@ public class CitiesFragment extends Fragment {
     private void initList() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         listView.setLayoutManager(linearLayoutManager);
-        adapter = new RecyclerCityAdapter(city, (int position) -> {
+
+        CitySource citySource = new CitySource(cityDao);
+
+        adapter = new RecyclerCityDBAdapter(citySource, (int position) -> {
             currentPosition = position;
-            selectedCity = city.get(currentPosition);
+            selectedCity = citySource.getCities().get(currentPosition).city;
             boolean hasConnection = hasConnection();
             if (!hasConnection) {
                 setAlert();
@@ -114,6 +128,7 @@ public class CitiesFragment extends Fragment {
                 showWeather();
             }
         });
+
         listView.setAdapter(adapter);
     }
 
@@ -205,9 +220,11 @@ public class CitiesFragment extends Fragment {
                 Fragment fragment = getParentFragmentManager().findFragmentById(R.id.nav_host_fragment);
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
 
-                //selectedCity = "Tokio";
                 detail = WeatherFragment.create(currentPosition, selectedCity);
-                fragmentTransaction.replace(R.id.fragment, detail);
+
+                //  fragmentTransaction.replace(R.id.fragment, detail);  //Ошибка здесь (одна из)
+
+
                 if (fragment != null) {
                     fragmentTransaction.detach(fragment);
                 }
@@ -223,13 +240,13 @@ public class CitiesFragment extends Fragment {
     }
 
 
-    private void loadImageWithPicasso() {
-        picassoBtn.setOnClickListener(view -> {
-            Toast.makeText(getContext(), "Loading", Toast.LENGTH_SHORT).show();
-            Picasso.get()
-                    .load("https://icon-icons.com/icons2/38/PNG/128/clouds_weather_cloud_4496.png")
-                    .into(picassoImg);
-        });
-    }
+//    private void loadImageWithPicasso() {
+//        picassoBtn.setOnClickListener(view -> {
+//            Toast.makeText(getContext(), "Loading", Toast.LENGTH_SHORT).show();
+//            Picasso.get()
+//                    .load("https://icon-icons.com/icons2/38/PNG/128/clouds_weather_cloud_4496.png")
+//                    .into(picassoImg);
+//        });
+//    }
 
 }
