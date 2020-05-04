@@ -34,4 +34,5 @@ public class NetworkReceiver extends BroadcastReceiver {
         Network[] networks = Objects.requireNonNull(cm).getAllNetworks();
         return networks.length != 0;
     }
+
 }

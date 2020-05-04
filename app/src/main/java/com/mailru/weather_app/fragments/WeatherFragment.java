@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,22 +57,21 @@ public class WeatherFragment extends Fragment {
     private RecyclerView recyclerViewWeek;
     private ArrayList<DataWeather> dataWeathers;
     private String currentCity;
-    private SharedPreferences defalutPrefs;
-    private String savePrefKey = "savePref";
+
 
     private final static String LOG_TAG = WeatherFragment.class.getSimpleName();
 
     static WeatherFragment create(int index, String currentCity) {
         WeatherFragment f = new WeatherFragment();
         Bundle args = new Bundle();
-        args.putInt("index", index);
-        args.putString("index", currentCity);
+        args.putInt("position", index);
+        args.putString("city", currentCity);
         f.setArguments(args);
         return f;
     }
 
     int getIndex() {
-        return requireArguments().getInt("index", 0);
+        return requireArguments().getInt("position", 0);
     }
 
     @Nullable
@@ -79,21 +79,19 @@ public class WeatherFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         Log.d(getClass().getSimpleName() + " - LifeCycle", "onCreateView");
+        if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE) {
+            FragmentManager fragmentManager = getParentFragmentManager();
+            fragmentManager.popBackStack();
+        }
         return inflater.inflate(R.layout.weather_layout, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         initViews(view);
-        defalutPrefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
-        try {
-            currentCity = requireArguments().getString("index", null);
-        } catch (IllegalStateException e) {
-            currentCity = readFromPreference(defalutPrefs);
-        }
 
+        currentCity = requireArguments().getString("city");
         parseJsonClass = new ParseJsonClass(currentCity, getContext());
         parseJsonRestClass = new ParseJsonRestClass(currentCity, getContext());
         initFonts();
@@ -103,18 +101,6 @@ public class WeatherFragment extends Fragment {
         updateWeatherData();
     }
 
-    private void saveToPreference(SharedPreferences preferences) {
-
-        SharedPreferences.Editor editor = preferences.edit();
-        String text = currentCity;
-        editor.putString(savePrefKey, text);
-        editor.apply();
-    }
-
-    private String readFromPreference(SharedPreferences preferences) {
-        return preferences.getString(savePrefKey, "Moscow");
-
-    }
 
     private void initFonts() {
         weatherFont = Typeface.createFromAsset(requireActivity().getAssets(), "fonts/weather.ttf");
@@ -200,9 +186,8 @@ public class WeatherFragment extends Fragment {
                                            @NonNull Response<WeatherRequestRestModel> response) {
                         Log.d("response.body", response.body() + "");
                         Log.d("response.isSuccessful", response.isSuccessful() + "");
-                        if (response.body() != null && response.isSuccessful()) {
+                        if (response.body() != null && response.isSuccessful() && isAdded()) {
                             renderWeather(response.body());
-
                         } else {
                             //Похоже, код у нас не в диапазоне [200..300) и случилась ошибка
                             //обрабатываем ее
@@ -228,7 +213,6 @@ public class WeatherFragment extends Fragment {
     }
 
     private void renderWeather(WeatherRequestRestModel model) {
-
         textCityView.setText(model.name);
         currentTime.setText(setCurrentTime());
         String details = "Pressure: " + model.main.pressure + " hPa\nHumidity: " + model.main.humidity + "%";
@@ -300,7 +284,7 @@ public class WeatherFragment extends Fragment {
     public void onStop() {
         super.onStop();
         Log.d(getClass().getSimpleName() + " - LifeCycle", "onStopFrag");
-        saveToPreference(defalutPrefs);
+
     }
 
 }
