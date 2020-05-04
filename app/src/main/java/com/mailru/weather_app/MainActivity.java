@@ -1,15 +1,23 @@
 package com.mailru.weather_app;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.Network;
+import android.os.Build;
 import android.os.Bundle;
+import android.telephony.CellInfoGsm;
+import android.telephony.CellSignalStrengthGsm;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -51,7 +59,9 @@ public class MainActivity extends BaseActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+
     }
+
 
 
     @Override
@@ -102,16 +112,5 @@ public class MainActivity extends BaseActivity {
         super.onStop();
         unregisterReceiver(networkReceiver);
     }
-
-    //    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        if (fragment != null) {
-//            fragmentTransaction.attach(fragment);
-//        }
-//        fragmentTransaction.commit();
-//    }
 
 }

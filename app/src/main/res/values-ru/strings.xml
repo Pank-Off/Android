@@ -65,4 +65,6 @@
 
     <string name="weather">Погода</string>
     <string name="changeimage">Поменять картинку</string>
+
+    <string name="weather_in_your_city">Погода в вашем городе!</string>
 </resources>

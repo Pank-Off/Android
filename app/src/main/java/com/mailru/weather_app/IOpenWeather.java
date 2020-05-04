@@ -11,4 +11,10 @@ public interface IOpenWeather {
     Call<WeatherRequestRestModel> loadWeather(@Query("q") String city,
                                               @Query("appid") String keyApi,
                                               @Query("units") String units);
+
+    @GET("data/2.5/weather")
+    Call<WeatherRequestRestModel> loadWeatherbyCoord(@Query("lat") double lat,
+                                                     @Query("lon") double lon,
+                                              @Query("appid") String keyApi,
+                                              @Query("units") String units);
 }

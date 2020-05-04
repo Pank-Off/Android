@@ -60,6 +60,7 @@ public class ParseJsonRestClass {
                                     Toast.LENGTH_SHORT).show();
                         }
                     });
+
         Log.d("sizeOut", infoToday.size() + "");
         return infoToday;
     }
