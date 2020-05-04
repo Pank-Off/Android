@@ -1,18 +1,19 @@
 package com.mailru.weather_app;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
+import android.net.Network;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -21,7 +22,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.mailru.weather_app.fragments.CitiesFragment;
-import com.mailru.weather_app.fragments.SettingsFragment;
 
 import java.util.Objects;
 
@@ -31,6 +31,8 @@ public class MainActivity extends BaseActivity {
     Context context;
     DrawerLayout drawer;
 
+    private BroadcastReceiver networkReceiver = new NetworkReceiver();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,58 +41,18 @@ public class MainActivity extends BaseActivity {
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
-
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_settings, R.id.nav_city,R.id.nav_weather)
+                R.id.nav_settings, R.id.nav_city, R.id.nav_weather)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        navigationView.setNavigationItemSelectedListener(item -> {
-            ActionBar toolbar = getSupportActionBar();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            switch (item.getItemId()) {
-                case R.id.nav_city:
-                    if (toolbar != null) {
-                        toolbar.setTitle("City");
-                    }
-                    CitiesFragment citiesFragment = new CitiesFragment();
-                    if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                        fragmentManager.popBackStack();
-                    }
-                    fragmentTransaction.replace(R.id.nav_host_fragment, citiesFragment);
-                    fragmentTransaction.detach(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.nav_host_fragment)));
-
-                    fragmentTransaction.commit();
-                    break;
-                case R.id.nav_settings:
-                    if (toolbar != null) {
-                        toolbar.setTitle("Settings");
-                    }
-                    SettingsFragment settingsFragment = new SettingsFragment();
-                    fragmentManager = getSupportFragmentManager();
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                        fragmentTransaction.replace(R.id.fragment_land, settingsFragment);
-                        fragmentTransaction.addToBackStack("backStack");
-                    } else {
-                        fragmentTransaction.replace(R.id.nav_host_fragment, settingsFragment);
-                        fragmentTransaction.detach(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.nav_host_fragment)));
-                    }
-                    fragmentTransaction.commit();
-                    break;
-                default:
-                   return false;
-            }
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
-        });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -130,14 +92,26 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        if (fragment != null) {
-            fragmentTransaction.attach(fragment);
-        }
-        fragmentTransaction.commit();
+    protected void onStart() {
+        super.onStart();
+        registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(networkReceiver);
+    }
+
+    //    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        if (fragment != null) {
+//            fragmentTransaction.attach(fragment);
+//        }
+//        fragmentTransaction.commit();
+//    }
 
 }

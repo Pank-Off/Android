@@ -61,4 +61,8 @@ public class SettingsFragment extends Fragment {
         settings_list.setAdapter(adapter);
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 }
