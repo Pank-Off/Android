@@ -10,11 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mailru.weather_app.room.CityDao;
 import com.mailru.weather_app.room.CityEntity;
 import com.mailru.weather_app.room.CitySource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerCityDBAdapter extends RecyclerView.Adapter<RecyclerCityDBAdapter.ViewHolder> {

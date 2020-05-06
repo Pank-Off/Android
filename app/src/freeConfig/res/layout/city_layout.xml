@@ -46,23 +46,24 @@
         android:layout_marginStart="8dp"
         android:text="@string/weather_in_your_city" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cities_list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-<!--    <com.google.android.material.button.MaterialButton-->
-<!--        android:id="@+id/picassoBtn"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="8dp"-->
-<!--        android:text="@string/picasso" />-->
+    <!--    <com.google.android.material.button.MaterialButton-->
+    <!--        android:id="@+id/picassoBtn"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="8dp"-->
+    <!--        android:text="@string/picasso" />-->
 
-<!--    <ImageView-->
-<!--        android:id="@+id/picassoImg"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        tools:src="@drawable/cloud_small"/>-->
+    <!--    <ImageView-->
+    <!--        android:id="@+id/picassoImg"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        tools:src="@drawable/cloud_small"/>-->
 
 </LinearLayout>

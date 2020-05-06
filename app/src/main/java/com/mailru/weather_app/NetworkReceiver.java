@@ -15,6 +15,7 @@ public class NetworkReceiver extends BroadcastReceiver {
 
     private int messageId = 1000;
     private Context context;
+
     @Override
     public void onReceive(Context context, Intent intent) {
         this.context = context;
@@ -24,7 +25,7 @@ public class NetworkReceiver extends BroadcastReceiver {
                 .setContentText("Нет подключения к интернету");
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if(!hasConnection()) {
+        if (!hasConnection()) {
             notificationManager.notify(messageId++, builder.build());
         }
     }

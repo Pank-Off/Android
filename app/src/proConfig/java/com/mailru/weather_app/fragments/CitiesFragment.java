@@ -2,53 +2,44 @@ package com.mailru.weather_app.fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
-import android.widget.ThemedSpinnerAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mailru.weather_app.App;
-import com.mailru.weather_app.MainActivity;
 import com.mailru.weather_app.R;
 import com.mailru.weather_app.RecyclerCityDBAdapter;
-import com.mailru.weather_app.WeatherDataLoader;
 import com.mailru.weather_app.WeatherDataWeekendLoader;
 import com.mailru.weather_app.room.CityDao;
 import com.mailru.weather_app.room.CitySource;
@@ -56,15 +47,11 @@ import com.mailru.weather_app.room.CitySource;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
-import java.util.zip.Inflater;
 
 import static android.content.Context.LOCATION_SERVICE;
-import static java.security.AccessController.getContext;
 
 public class CitiesFragment extends Fragment implements OnMapReadyCallback {
     private boolean isExistWeather;
@@ -78,6 +65,9 @@ public class CitiesFragment extends Fragment implements OnMapReadyCallback {
     private boolean isChecked;
     private Context context;
 
+    @SuppressLint("StaticFieldLeak")
+    private static Activity activity;
+
     private SharedPreferences defalutPrefs;
     private String savePrefKey = "savePref";
 
@@ -89,8 +79,6 @@ public class CitiesFragment extends Fragment implements OnMapReadyCallback {
     // private MaterialButton picassoBtn;
     //  private ImageView picassoImg;
 
-
-    private static ArrayList<String> city = new ArrayList<>(Arrays.asList("Moscow", "Tokio", "Paris"));
     private static CityDao cityDao = App.getInstance().getCityDao();
 
 
@@ -108,6 +96,7 @@ public class CitiesFragment extends Fragment implements OnMapReadyCallback {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         context = getContext();
+        activity = getActivity();
         defalutPrefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
         try {
             selectedCity = requireArguments().getString("index", null);
@@ -122,10 +111,7 @@ public class CitiesFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void setOnWeatherInYourCityClickListener() {
-        weatherInYourCityBtn.setOnClickListener(v -> {
-            getCoordinates();
-
-        });
+        weatherInYourCityBtn.setOnClickListener(v -> getCoordinates());
     }
 
     private void getCoordinates() {
@@ -437,6 +423,7 @@ public class CitiesFragment extends Fragment implements OnMapReadyCallback {
 
     private void setOnSelectClickListener() {
         selectBtn.setOnClickListener(v -> {
+            hideKeyboard();
             boolean hasConnection = hasConnection();
             if (!hasConnection) {
                 setAlert();
@@ -453,6 +440,19 @@ public class CitiesFragment extends Fragment implements OnMapReadyCallback {
                 }).show();
             }
         });
+    }
+
+    private static void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     private void setAlert() {

@@ -25,6 +25,19 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+    flavorDimensions 'version'
+    productFlavors {
+        freeConfig {
+            dimension = 'version'
+            versionNameSuffix = '.free'
+
+        }
+        proConfig {
+            dimension = 'version'
+            versionNameSuffix = '.pro'
+
+        }
+    }
 
 }
 
@@ -46,6 +59,7 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
 
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

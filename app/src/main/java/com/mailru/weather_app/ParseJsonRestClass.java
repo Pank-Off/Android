@@ -32,34 +32,34 @@ public class ParseJsonRestClass {
 
     public ArrayList<String> updateWeatherTodayData() {
         Log.d("asds", infoToday.size() + "");
-            OpenWeatherRepo.getSingleton().getAPI().loadWeather(currentCity,
-                    "8e4427442db813060908d56bee675cb7", "metric")
-                    .enqueue(new Callback<WeatherRequestRestModel>() {
-                        @Override
-                        public void onResponse(@NonNull Call<WeatherRequestRestModel> call,
-                                               @NonNull Response<WeatherRequestRestModel> response) {
-                            if (response.body() != null && response.isSuccessful()) {
-                                renderWeather(response.body());
-                            } else {
-                                //Похоже, код у нас не в диапазоне [200..300) и случилась ошибка
-                                //обрабатываем ее
-                                if (response.code() == 500) {
-                                    //ой, случился Internal Server Error. Решаем проблему
-                                } else if (response.code() == 401) {
-                                    //не авторизованы, что-то с этим делаем.
-                                    //например, открываем страницу с логинкой
-                                }// и так далее
-                            }
-                            Log.d("sizeInto", infoToday.size() + "");
+        OpenWeatherRepo.getSingleton().getAPI().loadWeather(currentCity,
+                "8e4427442db813060908d56bee675cb7", "metric")
+                .enqueue(new Callback<WeatherRequestRestModel>() {
+                    @Override
+                    public void onResponse(@NonNull Call<WeatherRequestRestModel> call,
+                                           @NonNull Response<WeatherRequestRestModel> response) {
+                        if (response.body() != null && response.isSuccessful()) {
+                            renderWeather(response.body());
+                        } else {
+                            //Похоже, код у нас не в диапазоне [200..300) и случилась ошибка
+                            //обрабатываем ее
+                            if (response.code() == 500) {
+                                //ой, случился Internal Server Error. Решаем проблему
+                            } else if (response.code() == 401) {
+                                //не авторизованы, что-то с этим делаем.
+                                //например, открываем страницу с логинкой
+                            }// и так далее
                         }
+                        Log.d("sizeInto", infoToday.size() + "");
+                    }
 
-                        //сбой при интернет подключении
-                        @Override
-                        public void onFailure(Call<WeatherRequestRestModel> call, Throwable t) {
-                            Toast.makeText(context, context.getString(R.string.unavailable_network),
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    //сбой при интернет подключении
+                    @Override
+                    public void onFailure(Call<WeatherRequestRestModel> call, Throwable t) {
+                        Toast.makeText(context, context.getString(R.string.unavailable_network),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         Log.d("sizeOut", infoToday.size() + "");
         return infoToday;

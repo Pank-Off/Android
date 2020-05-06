@@ -1,37 +1,22 @@
 package com.mailru.weather_app;
 
-import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.net.ConnectivityManager;
-import android.net.Network;
-import android.os.Build;
 import android.os.Bundle;
-import android.telephony.CellInfoGsm;
-import android.telephony.CellSignalStrengthGsm;
-import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
-import com.mailru.weather_app.fragments.CitiesFragment;
-
-import java.util.Objects;
 
 public class MainActivity extends BaseActivity {
 
@@ -61,7 +46,6 @@ public class MainActivity extends BaseActivity {
 
 
     }
-
 
 
     @Override
