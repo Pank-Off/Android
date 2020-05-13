@@ -12,7 +12,7 @@ public class OpenWeatherRepo {
     }
 
     public static OpenWeatherRepo getSingleton() {
-        if(singleton == null) {
+        if (singleton == null) {
             singleton = new OpenWeatherRepo();
         }
 

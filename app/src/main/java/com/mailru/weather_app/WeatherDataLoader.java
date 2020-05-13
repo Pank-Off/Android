@@ -7,13 +7,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class WeatherDataLoader {
+class WeatherDataLoader {
     private static final String OPEN_WEATHER_API_KEY = "8e4427442db813060908d56bee675cb7";
     private static final String OPEN_WEATHER_API_URL =
             "https://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
     private static final String KEY = "x-api-key";
 
-    public static JSONObject getJSONData(String city) {
+    static JSONObject getJSONData(String city) {
         try {
             URL url = new URL(String.format(OPEN_WEATHER_API_URL, city));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();

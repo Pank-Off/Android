@@ -21,16 +21,17 @@ public class ParseJsonClass {
 
     private Context context;
     private String currentCity;
-    private static final Handler handler =  new Handler();
+    private static final Handler handler = new Handler();
 
     private ArrayList<String> infoToday = new ArrayList<>();
     private ArrayList<DataWeather> infoWeek = new ArrayList<>();
     private final static String LOG_TAG = WeatherFragment.class.getSimpleName();
 
-    public ParseJsonClass(String currentCity, Context context){
+    public ParseJsonClass(String currentCity, Context context) {
         this.context = context;
         this.currentCity = currentCity;
     }
+
     public ArrayList<String> updateWeatherTodayData() {
 
         Thread t = new Thread() {
@@ -45,7 +46,7 @@ public class ParseJsonClass {
                     });
 
                 } else {
-                      renderWeather(jsonObject);
+                    renderWeather(jsonObject);
                 }
             }
         };
@@ -86,7 +87,6 @@ public class ParseJsonClass {
     }
 
 
-
     public ArrayList<DataWeather> updateWeatherWeekData() {
         Thread t = new Thread() {
             @Override
@@ -96,7 +96,7 @@ public class ParseJsonClass {
                     handler.post(() ->
                             Log.d(LOG_TAG, "json: "));
                 } else {
-                   renderWeekWeather(jsonObject);
+                    renderWeekWeather(jsonObject);
                 }
             }
         };
@@ -121,8 +121,8 @@ public class ParseJsonClass {
                 String[] s = dt_txt.split(" ");
 
                 infoWeek.add(new DataWeather(s[1],
-                             setWeatherIcon(details.getInt("id"),
-                             0, 0), setCurrentTemp(main)));
+                        setWeatherIcon(details.getInt("id"),
+                                0, 0), setCurrentTemp(main)));
 
             }
         } catch (Exception exc) {
@@ -135,6 +135,7 @@ public class ParseJsonClass {
         return jsonObject.getString("name").toUpperCase() + ", "
                 + jsonObject.getJSONObject("sys").getString("country");
     }
+
     private String setCurrentTime() {
         Date date = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("E MM.dd hh:mm", Locale.US);
@@ -151,6 +152,7 @@ public class ParseJsonClass {
         }
         return builder.toString();
     }
+
     private String setCurrentTemp(JSONObject main) throws JSONException {
         String currentTextText = String.format(Locale.getDefault(), "%.0f",
                 main.getDouble("temp")) + "\u2103";
@@ -158,6 +160,7 @@ public class ParseJsonClass {
         return currentTextText;
 
     }
+
     private String setWeatherIcon(int actualId, long sunrise, long sunset) {
         int id = actualId / 100;
         String icon = "";

@@ -9,23 +9,22 @@
         android:id="@+id/nav_settings"
         android:name="com.mailru.weather_app.fragments.SettingsFragment"
         android:label="Settings"
-        tools:layout="@layout/settings_layout">
-    </fragment>
+        tools:layout="@layout/settings_layout" />
 
     <fragment
         android:id="@+id/nav_city"
         android:name="com.mailru.weather_app.fragments.CitiesFragment"
         android:label="City"
         tools:layout="@layout/city_layout">
-        <action android:id="@+id/action_city_fragment_to_weather_fragment"
-            app:destination="@id/nav_weather"/>
+        <action
+            android:id="@+id/action_city_fragment_to_weather_fragment"
+            app:destination="@id/nav_weather" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_weather"
         android:name="com.mailru.weather_app.fragments.WeatherFragment"
         android:label="@string/weather"
-        tools:layout="@layout/weather_layout">
-    </fragment>
+        tools:layout="@layout/weather_layout" />
 
 </navigation>
